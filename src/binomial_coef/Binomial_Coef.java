@@ -6,7 +6,8 @@
 package binomial_coef;
 
 import java.math.BigInteger;
-import java.util.Scanner;
+import java.util.LinkedList;
+
 
 /**
  *
@@ -18,52 +19,83 @@ public class Binomial_Coef {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        
-        
+
+        LinkedList<LinkedList<BigInteger>> VNR = new LinkedList<>();
+        LinkedList<LinkedList<BigInteger>> VR = new LinkedList<>();
+        LinkedList<LinkedList<Long>> TNR = new LinkedList<>();
+        LinkedList<LinkedList<Long>> TR = new LinkedList<>();
         long startTime;
-        System.out.println("Tabla de valores (NR):");
-        for (int i = 0; i <=30; i += 1) {
+        int n=30;
+
+        for (int i = 0; i <= n; i += 1) {
+            
+            LinkedList<BigInteger> v = new LinkedList<>();
+            LinkedList<Long> t = new LinkedList<>();
             System.out.print("┊");
             for (int j = i; j >= 0; j--) {
+                
                 if (String.valueOf(Bin_CNR(new BigInteger(String.valueOf(i)), new BigInteger(String.valueOf(j)))).length() <= 5) {
-                    System.out.print(Bin_CNR(new BigInteger(String.valueOf(i)), new BigInteger(String.valueOf(j))) + "┊");
+                    startTime = 0;
+                    v.add(Bin_CNR(new BigInteger(String.valueOf(i)), new BigInteger(String.valueOf(j))));
+                    System.out.print(v.getLast()+"┊");
+                    t.add(System.nanoTime() - startTime);
                 } else {
-                    System.out.print(String.valueOf(Bin_CNR(new BigInteger(String.valueOf(i)), new BigInteger(String.valueOf(j)))).substring(0, 5) + "┊");
+                    startTime = 0;
+                    v.add(new BigInteger(String.valueOf(Bin_CNR(new BigInteger(String.valueOf(i)), new BigInteger(String.valueOf(j)))).substring(0, 5)));
+                    System.out.print(v.getLast()+"┊");
+                    t.add(System.nanoTime() - startTime);
                 }
+                
             }
             System.out.println("");
-        }
-        System.out.println("\nTabla de tiempos en ms (NR):");
-        for (int i = 0; i <=30; i += 1) {
-            System.out.print("┊");
-            startTime=0;
-            for (int j = i; j >= 0; j--) {
-                startTime = System.nanoTime();
-                Bin_CNR(new BigInteger(String.valueOf(i)), new BigInteger(String.valueOf(j)));
-                System.out.print(System.nanoTime() - startTime+"┊");
-            }
-            System.out.println("");
+            VNR.add(v);
+            TNR.add(t);
+            
         }
         
-        System.out.println("Tabla de valores (R):");
-        for (int i = 0; i <=30; i += 1) {
+//        ShowVTable(VNR);
+//        ShowTTable(TNR);
+        for (int i = 0; i <= n; i += 1) {
+            LinkedList<BigInteger> v = new LinkedList<>();
+            LinkedList<Long> t = new LinkedList<>();
             System.out.print("┊");
             for (int j = i; j >= 0; j--) {
                 if (String.valueOf(Bin_CR(new BigInteger(String.valueOf(i)), new BigInteger(String.valueOf(j)))).length() <= 5) {
-                    System.out.print(Bin_CR(new BigInteger(String.valueOf(i)), new BigInteger(String.valueOf(j))) + "┊");
+                    startTime = 0;
+                    v.add(Bin_CR(new BigInteger(String.valueOf(i)), new BigInteger(String.valueOf(j))));
+                    System.out.print(v.getLast()+"┊");
+                    t.add(System.nanoTime() - startTime);
                 } else {
-                    System.out.print(String.valueOf(Bin_CR(new BigInteger(String.valueOf(i)), new BigInteger(String.valueOf(j)))).substring(0, 5) + "┊");
+                    startTime = 0;
+                    v.add(new BigInteger(String.valueOf(Bin_CR(new BigInteger(String.valueOf(i)), new BigInteger(String.valueOf(j)))).substring(0, 5)));
+                    System.out.print(v.getLast()+"┊");
+                    t.add(System.nanoTime() - startTime);
                 }
+                
+            }
+            VR.add(v);
+            TR.add(t);
+            System.out.println("");
+        }
+//        ShowVTable(VR);
+//        ShowTTable(TR);
+    }
+
+    public static void ShowVTable(LinkedList<LinkedList<BigInteger>> a) {
+        
+        for (LinkedList<BigInteger> x : a) {
+            System.out.print("┊");
+            for (BigInteger y : x) {
+                System.out.print(y + "┊");
             }
             System.out.println("");
         }
-        System.out.println("\nTabla de tiempos en ms (R):");
-        for (int i = 0; i <=30; i += 1) {
+    }
+    public static void ShowTTable(LinkedList<LinkedList<Long>> a){
+        for (LinkedList<Long> x : a) {
             System.out.print("┊");
-            for (int j = i; j >= 0; j--) {
-                startTime = System.nanoTime();
-                Bin_CR(new BigInteger(String.valueOf(i)), new BigInteger(String.valueOf(j)));
-                System.out.print(System.nanoTime() - startTime+"┊");
+            for (Long y : x) {
+                System.out.print(y+"┊");
             }
             System.out.println("");
         }
