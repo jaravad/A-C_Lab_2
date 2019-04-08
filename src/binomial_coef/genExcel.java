@@ -34,9 +34,9 @@ public class genExcel {
             WritableSheet sheet = workBook.createSheet("Resultado", 0);
             WritableFont h = new WritableFont(WritableFont.COURIER, 16, WritableFont.NO_BOLD);
             WritableCellFormat hformat = new WritableCellFormat(h);
-            int i = 0, j;
+            int i = 1, j;
             for (LinkedList<BigInteger> x : a) {
-                j = 0;
+                j = 1;
                 for (BigInteger y : x) {
                     try {
                         sheet.addCell(new jxl.write.Label(j, i, String.valueOf(y), hformat));
@@ -67,9 +67,9 @@ public class genExcel {
             WritableSheet sheet = workBook.createSheet("Resultado", 0);
             WritableFont h = new WritableFont(WritableFont.COURIER, 16, WritableFont.NO_BOLD);
             WritableCellFormat hformat = new WritableCellFormat(h);
-            int i = 0, j;
+            int i = 1, j;
             for (LinkedList<Long> x : a) {
-                j = 0;
+                j = 1;
                 for (Long y : x) {
                     try {
                         sheet.addCell(new jxl.write.Label(j, i, String.valueOf(y), hformat));

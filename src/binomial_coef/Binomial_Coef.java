@@ -12,6 +12,14 @@ import java.util.LinkedList;
 /**
  *
  * @author jaravad
+ * Universidad del Norte
+ * Departamento de Sistemas
+ * Algoritmos y Complejidad
+ * Ing. José Capacho
+ * Código: 200103482
+ * Jesús David Santiago Jarava 
+ * Fecha: 08/04/2019
+ * Laboratorio 2, Coeficiente Binomial recursivo y no recursivo 
  */
 public class Binomial_Coef {
 
