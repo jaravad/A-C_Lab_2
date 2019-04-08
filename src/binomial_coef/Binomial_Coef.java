@@ -27,7 +27,7 @@ public class Binomial_Coef {
         long startTime;
         int n=15;//tope
 
-        for (int i = 0; i <= n; i += 50) {
+        for (int i = 0; i <= n; i += 1) {
             
             LinkedList<BigInteger> v = new LinkedList<>();
             LinkedList<Long> t = new LinkedList<>();
