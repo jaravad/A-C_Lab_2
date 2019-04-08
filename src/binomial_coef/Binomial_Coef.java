@@ -20,19 +20,21 @@ public class Binomial_Coef {
      */
     public static void main(String[] args) {
 
-        LinkedList<LinkedList<BigInteger>> VNR = new LinkedList<>();
-        LinkedList<LinkedList<BigInteger>> VR = new LinkedList<>();
-        LinkedList<LinkedList<Long>> TNR = new LinkedList<>();
-        LinkedList<LinkedList<Long>> TR = new LinkedList<>();
+        LinkedList<LinkedList<BigInteger>> VNR = new LinkedList<>();//Valores no recursivo
+        LinkedList<LinkedList<BigInteger>> VR = new LinkedList<>();//Valores recursivo
+        LinkedList<LinkedList<Long>> TNR = new LinkedList<>();//Tiempos no recursivo
+        LinkedList<LinkedList<Long>> TR = new LinkedList<>();//Tiempos recursivo
         long startTime;
-        int n=30;
+        int n=15;//tope
 
-        for (int i = 0; i <= n; i += 1) {
+        for (int i = 0; i <= n; i += 50) {
             
             LinkedList<BigInteger> v = new LinkedList<>();
             LinkedList<Long> t = new LinkedList<>();
-            System.out.print("┊");
-            for (int j = i; j >= 0; j--) {
+            if (i>0) {
+                System.out.print("┊");
+            }
+            for (int j = i; j > 0; j--) {
                 
                 if (String.valueOf(Bin_CNR(new BigInteger(String.valueOf(i)), new BigInteger(String.valueOf(j)))).length() <= 5) {
                     startTime = 0;
@@ -53,13 +55,19 @@ public class Binomial_Coef {
             
         }
         
+        String ruta="no_recursivo.xls"; //Exportar valores del no recursivo a Excel
+        genExcel g = new genExcel();
+        g.generarExcel(VNR, ruta);
+        
 //        ShowVTable(VNR);
 //        ShowTTable(TNR);
         for (int i = 0; i <= n; i += 1) {
             LinkedList<BigInteger> v = new LinkedList<>();
             LinkedList<Long> t = new LinkedList<>();
-            System.out.print("┊");
-            for (int j = i; j >= 0; j--) {
+            if (i>0) {
+                System.out.print("┊");
+            }
+            for (int j = i; j > 0; j--) {
                 if (String.valueOf(Bin_CR(new BigInteger(String.valueOf(i)), new BigInteger(String.valueOf(j)))).length() <= 5) {
                     startTime = 0;
                     v.add(Bin_CR(new BigInteger(String.valueOf(i)), new BigInteger(String.valueOf(j))));
@@ -79,6 +87,7 @@ public class Binomial_Coef {
         }
 //        ShowVTable(VR);
 //        ShowTTable(TR);
+        
     }
 
     public static void ShowVTable(LinkedList<LinkedList<BigInteger>> a) {
