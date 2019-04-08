@@ -25,8 +25,8 @@ public class Binomial_Coef {
         LinkedList<LinkedList<Long>> TNR = new LinkedList<>();//Tiempos no recursivo
         LinkedList<LinkedList<Long>> TR = new LinkedList<>();//Tiempos recursivo
         long startTime;
-        int n=15;//tope
-
+        int n=30;//tope
+        System.out.println("→ Valores (no recursivo):");
         for (int i = 0; i <= n; i += 1) {
             
             LinkedList<BigInteger> v = new LinkedList<>();
@@ -55,12 +55,16 @@ public class Binomial_Coef {
             
         }
         
-        String ruta="no_recursivo.xls"; //Exportar valores del no recursivo a Excel
+        String ruta="valores_no_recursivo.xls"; //Exportar valores del no recursivo a Excel
         genExcel g = new genExcel();
-        g.generarExcel(VNR, ruta);
+        g.generarVExcel(VNR, ruta);
+        ruta="tiempos_no_recursivo.xls";
+        g.generarTExcel(TNR, ruta);
         
 //        ShowVTable(VNR);
 //        ShowTTable(TNR);
+        System.out.println("");
+        System.out.println("→ Valores (recursivo):");
         for (int i = 0; i <= n; i += 1) {
             LinkedList<BigInteger> v = new LinkedList<>();
             LinkedList<Long> t = new LinkedList<>();
@@ -85,27 +89,43 @@ public class Binomial_Coef {
             TR.add(t);
             System.out.println("");
         }
-//        ShowVTable(VR);
-//        ShowTTable(TR);
+        
+        ruta="valores_recursivo.xls"; //Exportar valores del no recursivo a Excel
+        g.generarVExcel(VR, ruta);
+        ruta="tiempos_recursivo.xls";
+        g.generarTExcel(TR, ruta);
+        System.out.println("");
+        System.out.println("→ Tiempos (no recursivo):");
+        ShowTTable(TNR);
+        System.out.println("");
+        System.out.println("→ Tiempos (recursivo):");
+        ShowTTable(TR);
         
     }
 
     public static void ShowVTable(LinkedList<LinkedList<BigInteger>> a) {
-        
+        int i=0;
         for (LinkedList<BigInteger> x : a) {
-            System.out.print("┊");
+            if (i>0) {
+                System.out.print("┊");
+            }
             for (BigInteger y : x) {
                 System.out.print(y + "┊");
             }
+            i+=1;
             System.out.println("");
         }
     }
     public static void ShowTTable(LinkedList<LinkedList<Long>> a){
+        int i=0;
         for (LinkedList<Long> x : a) {
-            System.out.print("┊");
+            if (i>0) {
+                System.out.print("┊");
+            }
             for (Long y : x) {
                 System.out.print(y+"┊");
             }
+            i+=1;
             System.out.println("");
         }
     }

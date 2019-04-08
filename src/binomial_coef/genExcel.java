@@ -25,7 +25,7 @@ import jxl.write.WriteException;
  */
 public class genExcel {
 
-    public void generarExcel(LinkedList<LinkedList<BigInteger>> a, String ruta) {
+    public void generarVExcel(LinkedList<LinkedList<BigInteger>> a, String ruta) {
         try {
             WorkbookSettings conf = new WorkbookSettings();
             conf.setEncoding("ISO-8859-1");
@@ -38,6 +38,39 @@ public class genExcel {
             for (LinkedList<BigInteger> x : a) {
                 j = 0;
                 for (BigInteger y : x) {
+                    try {
+                        sheet.addCell(new jxl.write.Label(j, i, String.valueOf(y), hformat));
+                    } catch (WriteException ex) {
+                        Logger.getLogger(genExcel.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                    j += 1;
+                }
+                i += 1;
+            }
+
+            workBook.write();
+            workBook.close();
+
+        } catch (IOException ex) {
+            Logger.getLogger(genExcel.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (WriteException ex) {
+            Logger.getLogger(genExcel.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    public void generarTExcel(LinkedList<LinkedList<Long>> a, String ruta) {
+        try {
+            WorkbookSettings conf = new WorkbookSettings();
+            conf.setEncoding("ISO-8859-1");
+            WritableWorkbook workBook = Workbook.createWorkbook(new File(ruta), conf);
+
+            WritableSheet sheet = workBook.createSheet("Resultado", 0);
+            WritableFont h = new WritableFont(WritableFont.COURIER, 16, WritableFont.NO_BOLD);
+            WritableCellFormat hformat = new WritableCellFormat(h);
+            int i = 0, j;
+            for (LinkedList<Long> x : a) {
+                j = 0;
+                for (Long y : x) {
                     try {
                         sheet.addCell(new jxl.write.Label(j, i, String.valueOf(y), hformat));
                     } catch (WriteException ex) {
